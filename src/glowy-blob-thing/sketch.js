@@ -4,7 +4,6 @@
  *  + https://github.com/Mamboleoo/DecorativeBackgrounds/
  */
 import * as THREE from 'three';
-import EffectComposer from 'three-effectcomposer';
 
 import 'imports-loader?THREE=three!three/examples/js/shaders/CopyShader';
 import 'imports-loader?THREE=three!three/examples/js/shaders/FilmShader';
@@ -20,9 +19,6 @@ import 'imports-loader?THREE=three!three/examples/js/postprocessing/ShaderPass';
 import 'imports-loader?THREE=three!three/examples/js/postprocessing/UnrealBloomPass';
 
 import { noise } from 'perlin';
-import 'tachyons';
-
-EffectComposer(THREE);
 
 export default function initScene(canvas) {
   /**

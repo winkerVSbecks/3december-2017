@@ -1,7 +1,8 @@
 import Vue from 'vue';
+import 'tachyons';
 import router from './router';
 import App from './App';
-import 'tachyons';
+import './index.css';
 
 new Vue({
   el: '#app',

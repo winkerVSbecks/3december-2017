@@ -53,6 +53,28 @@ module.exports = {
         use: [{ loader: 'raw-loader' }, { loader: 'glslify-loader' }],
         exclude: /node_modules/,
       },
+      {
+        test: /\.(png|jpg|svg|gif)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: file => {
+                return '[path][name]-[hash].[ext]';
+              },
+            },
+          },
+        ],
+      },
+      {
+        test: /node_modules/,
+        loader: 'ify-loader',
+      },
+      {
+        enforce: 'post',
+        test: /\.js$/,
+        loader: 'ify-loader',
+      },
     ],
   },
 
