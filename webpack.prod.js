@@ -1,16 +1,16 @@
 const webpack = require('webpack');
 const path = require('path');
 
+const UglifyJSPlugin = require('uglifyjs-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  devtool: '#eval-source-map',
-
   entry: './src/main.js',
 
   output: {
-    filename: '[name].js',
-    chunkFilename: '[name].js',
+    filename: '[name].[chunkhash].js',
+    chunkFilename: '[name].[chunkhash].js',
     path: path.resolve(__dirname, 'dist'),
   },
 
@@ -34,7 +34,17 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: ExtractTextPlugin.extract({
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                sourceMap: true,
+              },
+            },
+          ],
+          fallback: 'style-loader',
+        }),
       },
       {
         test: /\.(glsl|frag|vert)$/,
@@ -86,6 +96,10 @@ module.exports = {
       children: true,
       minChunks: 2,
       async: true,
+    }),
+    new UglifyJSPlugin(),
+    new ExtractTextPlugin({
+      filename: '[name].[contenthash:8].css',
     }),
   ],
 };

@@ -1,10 +1,11 @@
 import * as THREE from 'three';
 import EffectComposerInit from 'three-effectcomposer';
 import OrbitControlsInit from 'three-orbit-controls';
+global.THREE = THREE;
 
-import 'imports-loader?THREE=three!three/examples/js/postprocessing/RenderPass';
 import 'imports-loader?THREE=three!three/examples/js/postprocessing/ShaderPass';
-import 'imports-loader?THREE=three!three/examples/js/shaders/DotScreenShader';
+import 'imports-loader?THREE=three!three/examples/js/postprocessing/RenderPass';
+import 'imports-loader?THREE=three!three/examples/js/shaders/LuminosityHighPassShader';
 import 'imports-loader?THREE=three!three/examples/js/postprocessing/UnrealBloomPass';
 
 import envMapImg from '../assets/env-map.png';
@@ -30,7 +31,7 @@ export default function initScene(canvas) {
   });
   renderer.setPixelRatio(PIXEL_RATIO);
   renderer.setSize(width, height);
-  renderer.setClearColor(0x001b44); // 001b44
+  renderer.setClearColor(0x001b44);
 
   /**
    * Scene
@@ -44,8 +45,8 @@ export default function initScene(canvas) {
    * Orbit
    */
   const controls = new OrbitControls(camera, renderer.domElement);
-  controls.enableZoom = false;
-  // controls.enablePan = false;
+  // controls.enableZoom = false;
+  controls.enablePan = false;
   controls.enableDamping = true;
   controls.dampingFactor = 0.1;
   controls.autoRotate = true;

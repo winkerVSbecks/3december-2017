@@ -2,3 +2,7 @@
   cursor: -webkit-grabbing;
   cursor: grabbing;
 }
+
+.z--1 {
+  z-index: -1;
+}
